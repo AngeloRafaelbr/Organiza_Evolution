@@ -14,9 +14,24 @@ generator client {
 }
 
 model User {
-  id String @id @default(uuid())
-  name String
-  email String @unique
-  password String
-  createAt DateTime @default(now()) 
+  id         String        @id @default(uuid())
+  name       String
+  email      String        @unique
+  password   String
+  createAt   DateTime      @default(now())
+  transactions Transaction[]  // ← relação 1:N
+}
+
+model Transaction {
+  id         Int       @id @default(autoincrement())
+  data       DateTime
+  tipo       Int       // 0 para income, 1 para spent
+  categoria  String
+  descricao  String
+  valor      Float
+  createdAt  DateTime  @default(now())
+
+  // Relação com User
+  userId     String
+  user       User      @relation(fields: [userId], references: [id])
 }

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function useIncomeForm(handleSaveIncome) {
+export default function useIncomeForm() {
     const [descricaoIncome, setDescricaoIncome] = useState('');
     const [dataIncome, setDataIncome] = useState('');
     const [income, setIncome] = useState();
@@ -68,7 +68,7 @@ export default function useIncomeForm(handleSaveIncome) {
         },
     ];
 
-    function SaveIncome(event) {
+    async function SaveIncome(event) {
         event.preventDefault();
 
         if (!descricaoIncome || !dataIncome || income <= 0) {
@@ -84,7 +84,26 @@ export default function useIncomeForm(handleSaveIncome) {
             tipo,
         };
 
-    handleSaveIncome(dadosFinanceiro);
+         const email = localStorage.getItem("userEmail");
+    
+        console.log(email)
+
+        try {
+                const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/transaction/transactionCreate`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                    dados: {...dadosFinanceiro},
+                    email: email
+}),
+                });
+
+            } catch (error) {
+                setError("Um erro ocorreu. Por favor tente de novo.");
+            }
+
 
     // Resetando os campos do formulário
     setDescricaoIncome('');

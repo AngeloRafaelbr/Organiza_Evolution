@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function useSpentForm(handleSaveSpent) {
+export default function useSpentForm() {
     const [descricaoSpent, setDescricaoSpent] = useState('');
     const [dataSpent, setDataSpent] = useState('');
     const [spent, setSpent] = useState();
@@ -68,7 +68,7 @@ export default function useSpentForm(handleSaveSpent) {
         },
     ];
 
-    function SaveSpent(event) {
+    async function SaveSpent(event) {
         event.preventDefault();
 
         if (!descricaoSpent || !dataSpent || spent <= 0) {
@@ -84,14 +84,30 @@ export default function useSpentForm(handleSaveSpent) {
             tipo,
         };
 
-    handleSaveSpent(dadosFinanceiro);
+        const email = localStorage.getItem("userEmail");
+
+    try {
+                    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/transaction/transactionCreate`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                    dados: {...dadosFinanceiro},
+                    email: email
+}),
+                });
+
+                } catch (error) {
+                    setError("Um erro ocorreu. Por favor tente de novo.");
+                }
 
     // Resetando os campos do formulário
     setDescricaoSpent('');
     setCategoriaSelecionadaSpent('');
     setDataSpent('');
     setSpent(0);
-    setTipo(1);
+    setTipo(0);
 }
 
     return {

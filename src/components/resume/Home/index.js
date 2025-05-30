@@ -8,11 +8,10 @@ import useSpentForm from '@/hooks/useSpentForm';
 import DynamicForm from "@/components/DynamicForm/DynamicForm";
 
 function Home() {
-    const { dadosFin, saldo, entrada, saida, handleSaveIncome, handleSaveSpent, onDelete, dadosCombinados } = useIncomeHome();
+    const { dadosFin, saldo, entrada, saida, handleSaveSpent, onDelete, dadosCombinados } = useIncomeHome();
 
-    const { inputIncomeFields, SaveIncome } = useIncomeForm(handleSaveIncome);
+    const { inputIncomeFields, SaveIncome } = useIncomeForm();
     const { inputSpentFields, SaveSpent } = useSpentForm(handleSaveSpent);
-
 
 
     return (
