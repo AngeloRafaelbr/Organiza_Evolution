@@ -2,7 +2,7 @@ import styles from "./UserMenu.module.css";
 import { useEffect, useState } from "react";
 import { MdEdit, MdLogout, MdOutlineAccountCircle, MdSettings } from "react-icons/md";
 import Link from 'next/link';
-import logout from "@/pages/api/auth/logout";
+import logout from "@/pages/api/old_auth/logout";
 import PrivateRoute from "@/components/PrivateRoute";
 import { useRouter } from "next/router";
 
