@@ -6,6 +6,7 @@ export default function useIncomeForm() {
     const [income, setIncome] = useState();
     const [tipo, setTipo] = useState(0);
     const [categoriaSelecionadaIncome, setCategoriaSelecionadaIncome] = useState('');
+    const [atualizaGrid, setAtualizaGrid] = useState(false);
 
     const inputIncomeFields = [
         {
@@ -100,8 +101,10 @@ export default function useIncomeForm() {
 }),
                 });
 
+                setAtualizaGrid(!atualizaGrid);
+
             } catch (error) {
-                setError("Um erro ocorreu. Por favor tente de novo.");
+                setError("Um erro ocorreu no create. Por favor tente de novo.");
             }
 
 

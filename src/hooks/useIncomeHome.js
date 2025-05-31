@@ -10,14 +10,14 @@ export default function useIncomeHome() {
     useEffect(() => {
   const fetchData = async () => {
       
-    const email = localStorage.getItem("userEmail");
+    /*const email = localStorage.getItem("userEmail");
         if (email) {
             const dadosSalvos = JSON.parse(localStorage.getItem(`Financeiro_${email}`)) ?? [];
-        }
+        }*/
         
 
     try {
-      const res= await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/transaction/transactionFind?email=${encodeURIComponent(email)}`, {
+      const res= await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/transaction/transactionFind`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -59,7 +59,7 @@ console.log("Estado dadosFin atualizado:", dadosFin);
         ]
 
 
-    function handleSaveSpent(dados) {
+    /*function handleSaveSpent(dados) {
         const data = [...dadosFin, dados];
         setDadosFin(data);
         setAtualizaGrid(!atualizaGrid);
@@ -67,7 +67,7 @@ console.log("Estado dadosFin atualizado:", dadosFin);
         if (email) {
             localStorage.setItem(`Financeiro_${email}`, JSON.stringify(data));
         }
-    }
+    }*/
 
     async function onDelete(index) {
         const data = [...dadosFin];
@@ -75,7 +75,6 @@ console.log("Estado dadosFin atualizado:", dadosFin);
         data.splice(index, 1);
         setDadosFin(data);
         setAtualizaGrid(!atualizaGrid);
-        const email = localStorage.getItem("userEmail");
 
         await fetch('/api/transaction/transactionDelete', {
           method: 'DELETE',
@@ -84,7 +83,6 @@ console.log("Estado dadosFin atualizado:", dadosFin);
           },
           body: JSON.stringify({
             id: id,
-            email: email
 }),
 });
 
@@ -95,7 +93,7 @@ console.log("Estado dadosFin atualizado:", dadosFin);
         saldo,
         entrada,
         saida,
-        handleSaveSpent,
+        //handleSaveSpent,
         onDelete,
         dadosCombinados
     };

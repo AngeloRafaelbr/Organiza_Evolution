@@ -10,26 +10,17 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { id, email } = req.body; // ID da transação a ser deletada
+    const { id } = req.body; // ID da transação a ser deletada
 
     if (!id) {
       return res.status(400).json({ error: 'ID da transação é obrigatório.' });
     }
 
-    const existingUser = await prisma.user.findUnique({ where: { email } });
-
-    if (!existingUser) {
-      return res.status(404).json({ error: 'Usuário não encontrado.' });
-    }
 
     // Verifica se a transação pertence ao usuário
     const transaction = await prisma.transaction.findUnique({
       where: { id },
     });
-
-    if (!transaction || transaction.userId !== existingUser.id) {
-      return res.status(403).json({ error: 'A transação não pertence ao usuário.' });
-    }
 
     // Deleta a transação
     await prisma.transaction.delete({
