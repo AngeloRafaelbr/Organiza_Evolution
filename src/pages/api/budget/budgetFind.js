@@ -1,4 +1,4 @@
-// src/pages/api/transaction/transactionFind.js
+// src/pages/api/budget/budgetFind.js
 
 import { PrismaClient } from '@prisma/client';
 
@@ -10,18 +10,18 @@ export default async function handler(req, res) {
   }
 
   try {
-    const getTransaction = await prisma.transaction.findMany(); // Busca todas as transações
+    const getBudgets = await prisma.budget.findMany(); // Busca todos os orçamentos
     
     //para debug
-    /*console.log(getTransaction);*/
+    /*console.log(getBudgets);*/
 
     return res.status(200).json({
-      message: 'Transações resgatadas com sucesso.',
-      transactions: getTransaction
+      message: 'Orçamentos resgatados com sucesso.',
+      budgets: getBudgets
     });
 
   } catch (error) {
-    console.error("Erro ao resgatar transações:", error);
+    console.error("Erro ao resgatar orçamentos:", error);
     return res.status(500).json({ error: 'Erro interno do servidor.' });
   }
 };

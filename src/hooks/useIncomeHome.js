@@ -26,9 +26,13 @@ export default function useIncomeHome() {
       });
 
       const data = await res.json();
-      setDadosFin(data.transactions); // agora você está atualizando os dados
-      console.log(data.transactions)
+      setDadosFin(data.transactions); // está atualizando os dados
+
+      //para debug
+      //console.log(data.transactions)
+      console.log("DADOSFIN:")
       console.log(dadosFin)
+
     } catch (error) {
       console.error("Erro ao buscar transações:", error);
       // Se quiser usar um estado de erro, defina setError aqui
@@ -52,7 +56,9 @@ useEffect(() => {
         setSaida(Saidas);
     }, [dadosFin, atualizaGrid]);
 
-console.log("Estado dadosFin atualizado:", dadosFin);
+    //Para debug
+    /*console.log("Estado dadosFin atualizado:", dadosFin);*/
+
           const dadosCombinados = [
         ...dadosFin.filter(item => item.tipo === 1), // Despesas
         ...dadosFin.filter(item => item.tipo === 0), // Receitas

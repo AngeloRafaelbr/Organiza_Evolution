@@ -7,7 +7,7 @@ import styles from "@/styles/budget.module.css"
 
 
 export default function Budget() {
-
+    
     return (
             <div className="cont">
                 <Navbar />

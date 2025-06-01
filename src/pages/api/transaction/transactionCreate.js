@@ -10,13 +10,15 @@ export default async function handler(req, res) {
   }
 
   try {
-    console.log("REQ.BODY");
-    console.log(req.body);
+    //para debug
+    /*console.log("REQ.BODY");
+    console.log(req.body);*/
+    
     const dadosFin = req.body.dados;
 
-    console.log(dadosFin);
+    //console.log(dadosFin);
 
-    // Salvar transação sem relacionamento com usuário
+    // Salvar transação SEM relacionamento com usuário
     const newTransaction = await prisma.transaction.create({
       data: {
         data: new Date(dadosFin.dataIncome || dadosFin.dataSpent),

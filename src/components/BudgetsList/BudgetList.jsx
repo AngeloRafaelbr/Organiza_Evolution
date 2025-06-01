@@ -27,19 +27,19 @@ export default function BudgetList() {
                         {budgets.map((budget) => {
                             // Calcular os gastos totais para a categoria do orçamento
                             const spentList = dadosFin.filter(item => item.tipo === 1);
-                            const matchingItems = spentList.filter(item => item.categoriaSelecionadaSpent === budget.category);
+                            const matchingItems = spentList.filter(item => item.categoria === budget.categoria);
 
-                            const totalSpentAmount = matchingItems.reduce((acc, item) => acc + Number(item.spent), 0);
+                            const totalSpentAmount = matchingItems.reduce((acc, item) => acc + Number(item.valor), 0);
 
                             return (
-                                <tr key={budget.budgetId}>
+                                <tr key={budget.id}>
                                     <td>
                                         <div className={styles.categoryCell}>
-                                            {budget.category}
-                                            <DeleteButton onClick={() => handleDeleteBudget(budget.budgetId)} />
+                                            {budget.categoria}
+                                            <DeleteButton onClick={() => handleDeleteBudget(budget.id)} />
                                         </div>
                                     </td>
-                                    <td>{budget.plannedAmount}</td>
+                                    <td>{budget.valorPlanejado}</td>
                                     <td>{totalSpentAmount}</td> {/* Exibindo o total calculado */}
                                 </tr>
                             );
