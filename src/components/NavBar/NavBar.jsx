@@ -36,6 +36,9 @@ export default function Navbar() {
                     <Link href="/budget">
                         <MdBarChart /> Orçamento
                     </Link>
+                    {<Link href="/dashboard">
+                        <MdMonetizationOn /> Gráficos
+                    </Link>}
                     {/*<Link href="/resume">
                         <MdMonetizationOn /> Despesas/Receitas
                     </Link>*/}
