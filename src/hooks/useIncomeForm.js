@@ -85,6 +85,10 @@ export default function useIncomeForm() {
             tipo,
         };
 
+         const email = localStorage.getItem("userEmail");
+    
+        console.log(email)
+
         try {
                 const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/transaction/transactionCreate`, {
                     method: "POST",
@@ -97,10 +101,8 @@ export default function useIncomeForm() {
 }),
                 });
 
-                setAtualizaGrid(!atualizaGrid);
-
             } catch (error) {
-                setError("Um erro ocorreu no create. Por favor tente de novo.");
+                setError("Um erro ocorreu. Por favor tente de novo.");
             }
 
 
