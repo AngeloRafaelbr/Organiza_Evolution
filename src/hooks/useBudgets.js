@@ -4,50 +4,57 @@ export default function useBudgets() {
     const [budgets, setBudgets] = useState([]);
     const [category, setCategory] = useState('');
     const [plannedAmount, setPlannedAmount] = useState('');
+    const [atualizaGrid, setAtualizaGrid] = useState(false);
 
 
      useEffect(() => {
-    async function fetchBudgets() {
-      try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/budget/budgetFind`, {
-            method: "GET",
-            headers:{
-                "Content-Type": "application/json",
-                "Cache-Control": "no-cache"
+     const fetchBudgets = async () => {
+            const email = localStorage.getItem("userEmail");
+
+            if (!email) {
+                console.warn("Email do usuário não encontrado no localStorage.");
+                return;
             }
-        });
 
-        const data = await response.json();
+            try {
+                const res = await fetch(`/api/budget/budgetFind?email=${encodeURIComponent(email)}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Cache-Control": "no-cache",
+                    }
+                });
 
-        if (!response.ok) {
-          console.error('Erro na resposta:', data);
-          return;
-        }
+                const data = await res.json();
+                setBudgets(data.budgets || []);
+                console.log("Orçamentos carregados:", data.budgets);
+            } catch (error) {
+                console.error("Erro ao buscar orçamentos:", error);
+            }
+        };
 
-        setBudgets(data.budgets);
-
-        //para debug (console navegador)
-        console.log(data)
-      } catch (error) {
-        console.error("Erro ao buscar transações:", error);
-      }
-    }
-
-    fetchBudgets();
-    
-  }, []);
+        fetchBudgets();
+    }, [atualizaGrid]);
 
     async function handleSaveBudget(event) {
-        event.preventDefault();
-        if (!category || !plannedAmount) {
-            alert("Por favor, preencha todos os campos.");
-            return;
-        }
+    event.preventDefault();
 
-        const dadosBudget = {
-            plannedAmount,
-            category
-        };
+    if (!category || !plannedAmount) {
+        alert("Por favor, preencha todos os campos.");
+        return;
+    }
+
+    const email = localStorage.getItem("userEmail");
+
+    if (!email) {
+        alert("Usuário não autenticado. Email não encontrado.");
+        return;
+    }
+
+    const dadosBudget = {
+        plannedAmount,
+        category
+    };
 
     try {
         const response = await fetch("/api/budget/budgetCreate", {
@@ -56,7 +63,8 @@ export default function useBudgets() {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                dados: {...dadosBudget}
+                dados: dadosBudget,
+                email: email,
             }),
         });
 
@@ -70,20 +78,19 @@ export default function useBudgets() {
 
         alert("Orçamento salvo com sucesso!");
 
-       
+        // Atualiza a lista após salvar
+        setAtualizaGrid(prev => !prev);
 
-        // Atualizar a lista se necessário
-        // await fetchBudgets();
+        // Limpa os campos
+        setCategory('');
+        setPlannedAmount('');
 
     } catch (error) {
         console.error("Erro ao salvar orçamento:", error);
         alert("Erro ao salvar orçamento. Verifique o console para mais detalhes.");
     }
+}
 
-     // Limpar os campos após salvar
-        setCategory('');
-        setPlannedAmount('');
-};
 
 
     const handleDeleteBudget = async (budgetId) => {

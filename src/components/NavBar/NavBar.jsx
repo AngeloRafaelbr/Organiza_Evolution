@@ -2,7 +2,7 @@
 import styles from './Navbar.module.css';
 import Link from 'next/link';
 import { MdBarChart, MdOutlineHome, MdMonetizationOn, MdTrendingUp } from 'react-icons/md';
-//import UserMenu from '@/components/UserMenu/UserMenu';
+import UserMenu from '@/components/UserMenu/UserMenu';
 import { useState } from 'react';
 import { FaBars, FaTimes } from 'react-icons/fa';
 
@@ -48,9 +48,9 @@ export default function Navbar() {
                 </div>
             </div>
 
-            {/*<div className={styles.userMenuDiv}>
+            <div className={styles.userMenuDiv}>
                 <UserMenu />
-            </div>*/}
+            </div>
         </section>
     );
 };

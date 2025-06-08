@@ -13,14 +13,30 @@ export default function BudgetChart() {
 
         // Buscar orçamentos diretamente da API
         const fetchBudgets = async () => {
+            const email = localStorage.getItem("userEmail");
+
+            if (!email) {
+                console.warn("Email do usuário não encontrado no localStorage.");
+                return;
+            }
+
             try {
-                const res = await fetch("/api/budget/budgetFind");
+                const res = await fetch(`/api/budget/budgetFind?email=${encodeURIComponent(email)}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Cache-Control": "no-cache",
+                    }
+                });
+
                 const data = await res.json();
-                setBudgets(data.budgets); // Ajuste aqui conforme estrutura de resposta
+                setBudgets(data.budgets || []);
+                console.log("Orçamentos carregados:", data.budgets);
             } catch (error) {
                 console.error("Erro ao buscar orçamentos:", error);
             }
         };
+
 
         fetchBudgets();
     }, []);

@@ -5,11 +5,12 @@ import BudgetAlert from "@/components/BudgetAlert/BudgetAlert";
 import Footer from "@/components/Footer/Footer";
 import Navbar from "@/components/NavBar/NavBar";
 import styles from "@/styles/budget.module.css"
-
+import PrivateRoute from "@/components/PrivateRoute"
 
 export default function Budget() {
     
     return (
+        <PrivateRoute>
             <div className="cont">
                 <Navbar />
                 <div className="main">
@@ -20,5 +21,6 @@ export default function Budget() {
                 </div>
                 <Footer />
             </div>
+        </PrivateRoute>
     )
 }

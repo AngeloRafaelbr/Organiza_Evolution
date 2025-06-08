@@ -11,6 +11,7 @@ import SpentChart from "@/components/SpentChart/spentChart";
 import IncomeChart from "@/components/incomeChart/IncomeChart";
 import Grid from "@/components/resume/Grid";
 import { MdInsertDriveFile } from 'react-icons/md';
+import PrivateRoute from "@/components/PrivateRoute"
 
 export default function Dashboard() {
     const {
@@ -35,7 +36,7 @@ export default function Dashboard() {
     };
 
     return (
-
+        <PrivateRoute>
             <div className="cont">
                 <Navbar />
                 <div className="main">
@@ -72,6 +73,7 @@ export default function Dashboard() {
                 </div>
                 <Footer />
             </div>
+        </PrivateRoute>
 
 
         

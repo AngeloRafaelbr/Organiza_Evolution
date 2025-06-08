@@ -10,10 +10,25 @@ export default async function handler(req, res) {
   }
 
   try {
-    const getBudgets = await prisma.budget.findMany(); // Busca todos os orçamentos
-    
-    //para debug
-    /*console.log(getBudgets);*/
+    const { email } = req.query;
+
+    if (!email) {
+      return res.status(400).json({ error: 'Email é obrigatório' });
+    }
+
+    const existingUser = await prisma.user.findUnique({
+      where: { email }
+    });
+
+    if (!existingUser) {
+      return res.status(404).json({ error: 'Usuário não encontrado.' });
+    }
+
+    const getBudgets = await prisma.budget.findMany({
+      where: {
+        userId: existingUser.id,
+      },
+    });
 
     return res.status(200).json({
       message: 'Orçamentos resgatados com sucesso.',

@@ -1,3 +1,5 @@
+// src/pages/api/budget/budgetCreate.js
+
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
@@ -8,24 +10,38 @@ export default async function handler(req, res) {
   }
 
   try {
-    //para debug
     console.log("REQ.BODY:");
     console.log(req.body);
 
     const dadosBudget = req.body.dados;
+    const email = req.body.email;
 
-    console.log(dadosBudget)
-
-    // Validação simples
-    if (!dadosBudget.category || !dadosBudget.plannedAmount) {
-      return res.status(400).json({ error: 'Campos 22obrigatórios não preenchidos.' });
+    // Verificação básica
+    if (!email) {
+      return res.status(400).json({ error: 'Email é obrigatório.' });
     }
 
-    // Criação do orçamento no banco de dados SEM relacionamento com usuario
+    if (!dadosBudget.category || !dadosBudget.plannedAmount) {
+      return res.status(400).json({ error: 'Campos obrigatórios não preenchidos.' });
+    }
+
+    // Verifica se o usuário existe
+    const existingUser = await prisma.user.findUnique({ where: { email } });
+
+    if (!existingUser) {
+      return res.status(404).json({ error: 'Usuário não encontrado.' });
+    }
+
+    // Criação do orçamento no banco com vínculo ao usuário
     const newBudget = await prisma.budget.create({
       data: {
         categoria: dadosBudget.category,
         valorPlanejado: parseFloat(dadosBudget.plannedAmount),
+        user: {
+          connect: {
+            id: existingUser.id,
+          },
+        },
       },
     });
 
