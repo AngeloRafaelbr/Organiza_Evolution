@@ -39,9 +39,9 @@ export default function Navbar() {
                     <Link href="/resume">
                         <MdMonetizationOn /> Despesas/Receitas
                     </Link>
-                    {/*<Link href="/investments">
+                    <Link href="/investments">
                         <MdTrendingUp /> Investimentos
-                    </Link>*/}
+                    </Link>
                 </div>
             </div>
 
