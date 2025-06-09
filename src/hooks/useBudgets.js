@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function useBudgets() {
     const [budgets, setBudgets] = useState([]);
     const [category, setCategory] = useState('');
     const [plannedAmount, setPlannedAmount] = useState('');
     const [atualizaGrid, setAtualizaGrid] = useState(false);
-
+    const router = useRouter();
 
      useEffect(() => {
      const fetchBudgets = async () => {
@@ -84,6 +85,7 @@ export default function useBudgets() {
         // Limpa os campos
         setCategory('');
         setPlannedAmount('');
+        router.refresh();
 
     } catch (error) {
         console.error("Erro ao salvar orçamento:", error);
@@ -115,7 +117,8 @@ export default function useBudgets() {
 
     // Atualiza o estado local, se necessário
     setBudgets((prev) => prev.filter((budget) => budget.id !== budgetId));
-
+    router.refresh();
+    
   } catch (error) {
     console.error('Erro ao deletar orçamento:', error);
     alert('Erro interno ao tentar deletar o orçamento.');

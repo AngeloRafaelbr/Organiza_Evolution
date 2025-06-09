@@ -14,14 +14,15 @@ generator client {
 }
 
 //Para implementação futura com login (user)
-//model User {
-//  id         String        @id @default(uuid())
-//  name       String
-//  email      String        @unique
-//  password   String
-//  createAt   DateTime      @default(now())
-//  transactions Transaction[]  // ← relação 1:N
-//}
+model User {
+  id         String        @id @default(uuid())
+  name       String
+  email      String        @unique
+  password   String
+  createAt   DateTime      @default(now())
+  transactions Transaction[]  // ← relação 1:N
+  Budgets Budget[]
+}
 
 model Transaction {
   id         Int       @id @default(autoincrement())
@@ -32,9 +33,9 @@ model Transaction {
   valor      Float
   createdAt  DateTime  @default(now())
 
-  // Relação com User futuramente
-  //userId     String
-  //user       User      @relation(fields: [userId], references: [id])
+  // Relação com User
+  userId     String
+  user       User      @relation(fields: [userId], references: [id])
 }
 
 model Budget {
@@ -43,5 +44,9 @@ model Budget {
   valorPlanejado  Float
   createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
+
+  // Relação com User
+  userId     String
+  user       User      @relation(fields: [userId], references: [id])
 }
 

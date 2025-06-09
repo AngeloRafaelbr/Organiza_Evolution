@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function useIncomeForm() {
     const [descricaoIncome, setDescricaoIncome] = useState('');
@@ -7,7 +8,8 @@ export default function useIncomeForm() {
     const [tipo, setTipo] = useState(0);
     const [categoriaSelecionadaIncome, setCategoriaSelecionadaIncome] = useState('');
     const [atualizaGrid, setAtualizaGrid] = useState(false);
-
+    const router = useRouter();
+    
     const inputIncomeFields = [
         {
             label: "Data",
@@ -100,13 +102,14 @@ export default function useIncomeForm() {
                     email: email
 }),
                 });
-
+                router.refresh();
             } catch (error) {
                 setError("Um erro ocorreu. Por favor tente de novo.");
             }
 
 
     // Resetando os campos do formulário
+    
     setDescricaoIncome('');
     setCategoriaSelecionadaIncome('');
     setDataIncome('');

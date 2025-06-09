@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useRouter } from 'next/navigation';
 
 export default function useIncomeHome() {
     const [dadosFin, setDadosFin] = useState([]);
@@ -6,7 +7,8 @@ export default function useIncomeHome() {
     const [entrada, setEntrada] = useState(0);
     const [saida, setSaida] = useState(0);
     const [atualizaGrid, setAtualizaGrid] = useState(false);
-
+    const router = useRouter();
+    
     useEffect(() => {
   const fetchData = async () => {
       
@@ -87,7 +89,7 @@ console.log("Estado dadosFin atualizado:", dadosFin);
             email: email
 }),
 });
-
+    router.refresh();
     }
 
     return {

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function useSpentForm() {
     const [descricaoSpent, setDescricaoSpent] = useState('');
@@ -6,6 +7,7 @@ export default function useSpentForm() {
     const [spent, setSpent] = useState();
     const [tipo, setTipo] = useState(1);
     const [categoriaSelecionadaSpent, setCategoriaSelecionadaSpent] = useState('');
+    const router = useRouter();
 
     const inputSpentFields = [
         {
@@ -97,7 +99,7 @@ export default function useSpentForm() {
                     email: email
 }),
                 });
-
+                router.refresh();
                 } catch (error) {
                     setError("Um erro ocorreu. Por favor tente de novo.");
                 }

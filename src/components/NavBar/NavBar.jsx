@@ -30,18 +30,15 @@ export default function Navbar() {
                 </button>
 
                 <div className={`${styles.navLinks} ${isMenuOpen ? styles.active : ''}`}>
-                    <Link href="/">
+                    <Link href="/dashboard">
                         <MdOutlineHome /> Home
                     </Link>
                     <Link href="/budget">
                         <MdBarChart /> Orçamento
                     </Link>
-                    {<Link href="/dashboard">
-                        <MdMonetizationOn /> Gráficos
-                    </Link>}
-                    {/*<Link href="/resume">
+                    <Link href="/resume">
                         <MdMonetizationOn /> Despesas/Receitas
-                    </Link>*/}
+                    </Link>
                     {/*<Link href="/investments">
                         <MdTrendingUp /> Investimentos
                     </Link>*/}
