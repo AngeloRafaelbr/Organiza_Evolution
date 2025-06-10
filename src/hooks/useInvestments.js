@@ -15,7 +15,7 @@ export default function useInvestments() {
     if (!email) return;
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/investment/investmentFind?email=${encodeURIComponent(email)}`, {
+      const res = await fetch(`/api/investment/investmentFind?email=${encodeURIComponent(email)}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

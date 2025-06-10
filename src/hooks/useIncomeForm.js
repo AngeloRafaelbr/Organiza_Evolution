@@ -92,7 +92,7 @@ export default function useIncomeForm() {
         console.log(email)
 
         try {
-                const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/transaction/transactionCreate`, {
+                const res = await fetch("/api/transaction/transactionCreate", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

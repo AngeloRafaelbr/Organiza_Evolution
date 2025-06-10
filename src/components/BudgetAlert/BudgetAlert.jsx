@@ -19,7 +19,7 @@ export default function BudgetAlert() {
     useEffect(() => {
         async function fetchBudgets() {
           try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/budget/budgetFind`, {
+            const response = await fetch("/api/budget/budgetFind", {
                 method: "GET",
                 headers:{
                     "Content-Type": "application/json",

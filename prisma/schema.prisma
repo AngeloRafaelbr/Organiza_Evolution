@@ -6,7 +6,7 @@
 
 datasource db {
 provider = "mysql"
-url      = env("DATABASE_URL")
+url      = "mysql://root:root123@db:3306/organiza"
 }
 
 generator client {

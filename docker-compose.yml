@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: mysql-container
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: organiza
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nextjs-organiza_evolution-app
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: mysql://root:root123@db:3306/organiza
+      JWT_SECRET: "senhaDoJWTQueDeveriaSerBemForte"
+      NEXT_PUBLIC_BASE_URL: http://localhost:3000
+    depends_on:
+      - db
+    
+
+volumes:
+  mysql-data:

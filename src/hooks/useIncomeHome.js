@@ -19,7 +19,7 @@ export default function useIncomeHome() {
         
 
     try {
-      const res= await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/transaction/transactionFind?email=${encodeURIComponent(email)}`, {
+      const res= await fetch(`/api/transaction/transactionFind?email=${encodeURIComponent(email)}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
