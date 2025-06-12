@@ -11,7 +11,7 @@ export default async function handler(req, res) {
 
   try {
     //para debug (console aplicação node)
-    console.log("BODY RECEBIDO PARA DELETE:", req.body);
+    //console.log("BODY RECEBIDO PARA DELETE:", req.body);
 
     const { id } = req.body; // ID do orçamento a ser deletado
 

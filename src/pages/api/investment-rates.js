@@ -1,5 +1,8 @@
 // pages/api/investment-rates.js
 
+//está sendo chamado pela pagina de Investimentos (investments.jsx) através de um fetch dentro de getStaticProps
+//isso implica que o caminho da api deve ser passado com o "localhost" e não com o caminho relativo (diretomente /api/investment-rates)
+
 export default function handler(req, res) {
     // Simulando uma mudança de dados a cada requisição
     const data = [

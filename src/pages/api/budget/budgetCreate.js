@@ -12,8 +12,8 @@ export default async function handler(req, res) {
   try {
 
     //para debug (console aplicação node)
-    console.log("REQ.BODY:");
-    console.log(req.body);
+    //console.log("REQ.BODY:");
+    //console.log(req.body);
 
     const dadosBudget = req.body.dados;
     const email = req.body.email;

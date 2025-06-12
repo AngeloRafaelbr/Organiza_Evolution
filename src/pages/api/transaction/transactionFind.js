@@ -31,8 +31,8 @@ export default async function handler(req, res) {
     });
 
     //para debug (console aplicação node)
-    console.log("Transações encontradas:");
-    console.log(getTransaction)
+    //console.log("Transações encontradas:");
+    //console.log(getTransaction)
 
     return res.status(200).json({
       message: 'Transações RESGATADAS com sucesso.',

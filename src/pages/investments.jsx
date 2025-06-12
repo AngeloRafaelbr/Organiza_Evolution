@@ -57,9 +57,12 @@ export default function Investments({ initialGrowthData }) {
 }
 
 // Função getStaticProps simplificada
+// Mudanças no getStaticProps exigem "npm run build" para serem aplicadas
 export async function getStaticProps() {
     try {
-        const res = await fetch("/api/investment-rates"); // Buscar dados de crescimento da API
+        const serverUrl = process.env.SERVER_URL || process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+
+        const res = await fetch(`${serverUrl}/api/investment-rates`); // Buscar dados de crescimento da API
         const growthData = await res.json();
 
         return {
