@@ -5,8 +5,11 @@ import DeleteButton from '@/components/DeleteButton/DeleteButton';
 import styles from '@/components/resume/Grid/index.module.css';
 
 function Grid({ dadosFin, onDelete }) {
-    console.log("GRID:")
-    console.log(dadosFin)
+    
+    //Para debug (console navegador)
+    //console.log("GRID:")
+    //console.log(dadosFin)
+
     const formatarData = (data) => {
         const dataParseada = new Date(data);
         if (isValid(dataParseada)) {
@@ -30,9 +33,12 @@ function Grid({ dadosFin, onDelete }) {
 
                 <tbody>
                     {dadosFin?.map((dados, index) => {
+                        
+                        //para debug (console navegador)
+                        //console.log("DADOS")
+                        //console.log(dados)
+                        
                         // Verifica se é receita ou despesa e ajusta os campos conforme o tipo
-                        console.log("DADOS")
-                        console.log(dados)
                         const categoria = dados.categoria ;
                         const descricao = dados.descricao;
                         const data = formatarData (dados.data);

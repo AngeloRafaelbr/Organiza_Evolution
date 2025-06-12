@@ -28,7 +28,10 @@ export default function useBudgets() {
 
                 const data = await res.json();
                 setBudgets(data.budgets || []);
-                console.log("Orçamentos carregados:", data.budgets);
+
+                //para debug (console navegador)
+                //console.log("Orçamentos carregados:", data.budgets);
+
             } catch (error) {
                 console.error("Erro ao buscar orçamentos:", error);
             }

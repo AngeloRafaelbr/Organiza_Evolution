@@ -10,6 +10,8 @@ export default async function handler(req, res) {
   }
 
   try {
+
+    //para debug (console aplicação node)
     console.log("REQ.BODY:");
     console.log(req.body);
 

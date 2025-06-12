@@ -29,8 +29,11 @@ export default function useIncomeHome() {
 
       const data = await res.json();
       setDadosFin(data.transactions); // agora você está atualizando os dados
-      console.log(data.transactions)
-      console.log(dadosFin)
+
+      //para debug (console navegador)
+      //console.log(data.transactions)
+      //console.log(dadosFin)
+
     } catch (error) {
       console.error("Erro ao buscar transações:", error);
       // Se quiser usar um estado de erro, defina setError aqui

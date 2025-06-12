@@ -6,7 +6,7 @@
 
 datasource db {
 provider = "mysql"
-url      = "mysql://root:root123@db:3306/organiza"
+url      = "mysql://root:root123@db:3306/organiza"  //TROCAR "db" por "localhost" se rodar na própria máquina sem container.
 }
 
 generator client {

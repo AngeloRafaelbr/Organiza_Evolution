@@ -1,3 +1,5 @@
+#(2º passo da inicialização)
+
 # Dockerfile simplificado para Next.js com Prisma
 FROM node:18-alpine
 
@@ -26,5 +28,8 @@ RUN npm run build
 # Expor porta
 EXPOSE 3000
 
-# Comando de inicialização
+# Usar script de inicialização
 CMD ["npm", "start"]
+
+#Depois disso, executar configuração do prisma para criação de tabelas
+#(prisma migrate deploy-> se já existir migrations ou prisma db push -> se não existir migrations)

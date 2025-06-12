@@ -37,7 +37,8 @@ export default function BudgetAlert() {
             setBudgets(data.budgets);
     
             //para debug (console navegador)
-            console.log(data)
+            //console.log(data)
+
           } catch (error) {
             console.error("Erro ao buscar transações:", error);
           }

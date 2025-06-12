@@ -10,11 +10,14 @@ export default async function handler(req, res) {
   }
 
   try {
-    console.log("REQ.BODY - test for transactioCreate")
+    //para debug (console aplicação node)
+    console.log("REQ.BODY - test for transactionCreate")
     console.log(req.body)
+
     const dadosFin = req.body.dados;
 
-    console.log("dadosFin- test for transactioCreate")
+    //para debug (console aplicação node)
+    console.log("dadosFin- test for transactionCreate")
     console.log(dadosFin)
 
     const existingUser = await prisma.user.findUnique({ where: { email: req.body.email } });

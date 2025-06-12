@@ -12,6 +12,10 @@ services:
       - "3306:3306"
     volumes:
       - mysql-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
 
   app:
     build:
@@ -25,7 +29,8 @@ services:
       JWT_SECRET: "senhaDoJWTQueDeveriaSerBemForte"
       NEXT_PUBLIC_BASE_URL: http://localhost:3000
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     
 
 volumes:

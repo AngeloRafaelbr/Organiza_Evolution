@@ -89,7 +89,8 @@ export default function useIncomeForm() {
 
          const email = localStorage.getItem("userEmail");
     
-        console.log(email)
+        //para debug (console navegador)
+        //console.log(email)
 
         try {
                 const res = await fetch("/api/transaction/transactionCreate", {

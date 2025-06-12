@@ -35,10 +35,10 @@ O **Organiza Evolution** permite aos usuários registrar receitas, despesas, inv
 
 ## 🚀 Tecnologias e Ferramentas Utilizadas
 
-- **Frontend:** HTML, CSS, JavaScript
-- **Design:** Figma, Adobe XD (ou similares)
-- **API Simulada:** json-server
-- **Persistência Local:** LocalStorage
+- **Frontend:** HTML, CSS, JavaScript, framework "Next.js"
+- **Design:** balsamiq, Figma, Adobe XD 
+- **API Simulada:** NODE-server
+- **Banco de Dados:** MYSQL, e Persistência Local(LocalStorage) 
 - **Deploy:** Surge.sh
 
 ---
@@ -54,47 +54,83 @@ O **Organiza Evolution** permite aos usuários registrar receitas, despesas, inv
 
 ---
 
-## ▶️ Como rodar o projeto localmente
+## ▶️ Como rodar o projeto LOCALMENTE (Via Terminal do próprio computador/servidor)
 
 1. **Clone este repositório:**
-   ```bash
+   
    git clone https://github.com/AngeloRafaelbr/Organiza_Evolution.git
-   ```
+   
 
 2. **Acesse a pasta do projeto:**
-   ```bash
+   
    cd Organiza_Evolution
-   ```
+   
 
-3. **Instale as dependências (se necessário):**
-   > Caso utilize alguma dependência, instale usando o comando correspondente (`npm install` para projetos Node, por exemplo).
+3. **Configure um banco de dados (Recomendado MYSQL) deixe-o ativo**
+   > Sugere-se executar um container mysql pela praticidade.
+   > Lembre-se de verificar as variáveis de ambiente no .env
+   > Lembre-se de verificar a variavel "url" no arquivo prisma/schema.prisma, a indicação de onde o BD está sendo executado deve ser "localhost" ("mysql://root:root123@localhost:3306/organiza")
 
-4. **Inicie o servidor fake (json-server):**
-   ```bash
-   npx json-server --watch db.json --port 3001
-   ```
-   > Certifique-se de que o arquivo `db.json` está presente e configurado corretamente.
+4. **Instale as dependências (se necessário):**
+    instale dependências usando o comando `npm install` (por ser projeto Node).
 
-5. **Abra o projeto no navegador:**
-   Basta abrir o arquivo `index.html` ou rodar um servidor local (ex: Live Server no VS Code).
+5. **Configure PRISMA (ORM) - gerencior de banco de dados:**
+   >npx prisma generate
+
+   >npx prisma migrate deploy (Se houver migrations criadas -> Originalmente, repositorio já possui!)
+   ou
+   >npx prisma db push (Se não houver migrations criadas)
+
+6. **Executo comando de inicialização do serviço do app**
+   npm start
+
+7. **Abra o projeto no navegador:**
+   Basta rodar um servidor local (ex: http://localhost:3000).
 
 ---
+## ▶️ Como rodar o projeto em container DOCKER
 
+1. **Clone este repositório:**
+   git clone https://github.com/AngeloRafaelbr/Organiza_Evolution.git
+
+2. **Acesse a pasta do projeto:**
+   cd Organiza_Evolution
+
+   > Lembre-se de verificar as variáveis de ambiente no "docker-compose.yml" (diferentemente da execução local, que é no .env)
+
+3. **Verifique a variavel "url" no arquivo prisma/schema.prisma**
+   rodando no docker, a indicação de onde o BD está sendo executado deve ser o nome do serviço do docker-compose.yml, que é "db" ("mysql://root:root123@db:3306/organiza")
+
+4. **Realize Build da imagem e já inicie a imagem com seus containers:**
+   docker-compose up --build -d
+
+5. **Configure PRISMA (ORM) - gerencior de banco de dados:**   
+   docker exec -it nextjs-organiza_evolution-app npx prisma migrate deploy (Se houver migrations criadas -> Originalmente, repositorio já possui!)
+
+   docker exec -it nextjs-organiza_evolution-app npx prisma db push (Se não houver migrations criadas)
+
+6. **Executo comando de inicialização do serviço do app**
+   >Se necessário, antes, executar npm run build
+   docker exec -it nextjs-organiza_evolution-app npm start
+
+7. **Abra o projeto no navegador:**
+   Basta rodar um servidor local (ex: http://localhost:3000).
+ 
 ## 📢 Como contribuir
 
 1. Faça um fork deste repositório.
 2. Crie uma branch para sua feature ou correção:
-   ```bash
+   
    git checkout -b nome-da-sua-branch
-   ```
+   
 3. Faça suas alterações e commit:
-   ```bash
+   
    git commit -m "Descrição da sua alteração"
-   ```
+   
 4. Suba para o seu fork:
-   ```bash
+   
    git push origin nome-da-sua-branch
-   ```
+   
 5. Abra um Pull Request detalhando suas contribuições.
 
 ---
