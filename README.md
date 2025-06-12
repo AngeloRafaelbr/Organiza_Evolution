@@ -58,12 +58,12 @@ O **Organiza Evolution** permite aos usuários registrar receitas, despesas, inv
 
 1. **Clone este repositório:**
    
-   git clone https://github.com/AngeloRafaelbr/Organiza_Evolution.git
+   > git clone https://github.com/AngeloRafaelbr/Organiza_Evolution.git
    
 
 2. **Acesse a pasta do projeto:**
    
-   cd Organiza_Evolution
+   > cd Organiza_Evolution
    
 
 3. **Configure um banco de dados (Recomendado MYSQL) deixe-o ativo**
@@ -72,7 +72,7 @@ O **Organiza Evolution** permite aos usuários registrar receitas, despesas, inv
    > Lembre-se de verificar a variavel "url" no arquivo prisma/schema.prisma, a indicação de onde o BD está sendo executado deve ser "localhost" ("mysql://root:root123@localhost:3306/organiza")
 
 4. **Instale as dependências (se necessário):**
-    instale dependências usando o comando `npm install` (por ser projeto Node).
+    >instale dependências usando o comando `npm install` (por ser projeto Node).
 
 5. **Configure PRISMA (ORM) - gerencior de banco de dados:**
    >npx prisma generate
@@ -82,16 +82,16 @@ O **Organiza Evolution** permite aos usuários registrar receitas, despesas, inv
    >npx prisma db push (Se não houver migrations criadas)
 
 6. **Executo comando de inicialização do serviço do app**
-   npm start
+   > npm start
 
 7. **Abra o projeto no navegador:**
-   Basta rodar um servidor local (ex: http://localhost:3000).
+   >Basta rodar um servidor local (ex: http://localhost:3000).
 
 ---
 ## ▶️ Como rodar o projeto em container DOCKER
 
 1. **Clone este repositório:**
-   git clone https://github.com/AngeloRafaelbr/Organiza_Evolution.git
+   > git clone https://github.com/AngeloRafaelbr/Organiza_Evolution.git
 
 2. **Acesse a pasta do projeto:**
    cd Organiza_Evolution
@@ -99,22 +99,22 @@ O **Organiza Evolution** permite aos usuários registrar receitas, despesas, inv
    > Lembre-se de verificar as variáveis de ambiente no "docker-compose.yml" (diferentemente da execução local, que é no .env)
 
 3. **Verifique a variavel "url" no arquivo prisma/schema.prisma**
-   rodando no docker, a indicação de onde o BD está sendo executado deve ser o nome do serviço do docker-compose.yml, que é "db" ("mysql://root:root123@db:3306/organiza")
+   > rodando no docker, a indicação de onde o BD está sendo executado deve ser o nome do serviço do docker-compose.yml, que é "db" ("mysql://root:root123@db:3306/organiza")
 
 4. **Realize Build da imagem e já inicie a imagem com seus containers:**
-   docker-compose up --build -d
+   > docker-compose up --build -d
 
 5. **Configure PRISMA (ORM) - gerencior de banco de dados:**   
-   docker exec -it nextjs-organiza_evolution-app npx prisma migrate deploy (Se houver migrations criadas -> Originalmente, repositorio já possui!)
+   > docker exec -it nextjs-organiza_evolution-app npx prisma migrate deploy (Se houver migrations criadas -> Originalmente, repositorio já possui!)
 
-   docker exec -it nextjs-organiza_evolution-app npx prisma db push (Se não houver migrations criadas)
+   > docker exec -it nextjs-organiza_evolution-app npx prisma db push (Se não houver migrations criadas)
 
 6. **Executo comando de inicialização do serviço do app**
    >Se necessário, antes, executar npm run build
-   docker exec -it nextjs-organiza_evolution-app npm start
+   > docker exec -it nextjs-organiza_evolution-app npm start
 
 7. **Abra o projeto no navegador:**
-   Basta rodar um servidor local (ex: http://localhost:3000).
+   > Basta rodar um servidor local (ex: http://localhost:3000).
  
 ## 📢 Como contribuir
 
